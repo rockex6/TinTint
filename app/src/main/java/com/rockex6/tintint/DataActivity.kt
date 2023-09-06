@@ -1,6 +1,7 @@
 package com.rockex6.tintint
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -38,14 +39,18 @@ class DataActivity : AppCompatActivity() {
             .subscribeBy(
                 onSuccess = { dataList ->
                     initRecyclerView(dataList)
+                    hideProgressBar()
                 },
-                onError = { e -> }
+                onError = { e ->
+                    hideProgressBar()
+                }
             )
     }
 
     private fun initRecyclerView(dataList: List<DataModel>) {
         binding.list.apply {
             layoutManager = GridLayoutManager(this@DataActivity, 4)
+            adapter = DataListAdapter(dataList)
         }
     }
 
@@ -54,5 +59,7 @@ class DataActivity : AppCompatActivity() {
         compositeDisposable.dispose()
     }
 
-
+    fun hideProgressBar() {
+        binding.progressBar.visibility = View.GONE
+    }
 }
