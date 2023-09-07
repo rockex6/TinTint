@@ -1,6 +1,7 @@
-package com.rockex6.tintint
+package com.rockex6.tintint.datapage
 
 import androidx.fragment.app.FragmentManager
+import com.rockex6.tintint.R
 
 class DataListCoordinator(private val fragmentManager: FragmentManager) {
 

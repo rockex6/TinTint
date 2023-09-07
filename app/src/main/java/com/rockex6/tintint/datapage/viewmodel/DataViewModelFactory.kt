@@ -1,10 +1,7 @@
-package com.rockex6.tintint
+package com.rockex6.tintint.datapage.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.CreationExtras
-import com.rockex6.tintint.viewmodel.DataRepository
-import com.rockex6.tintint.viewmodel.DataViewModel
 
 
 class DataViewModelFactory(private val repository: DataRepository) : ViewModelProvider.Factory {

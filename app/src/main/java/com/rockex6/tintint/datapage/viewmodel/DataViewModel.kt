@@ -1,8 +1,8 @@
-package com.rockex6.tintint.viewmodel
+package com.rockex6.tintint.datapage.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.rockex6.tintint.model.DataModel
+import com.rockex6.tintint.datapage.model.DataModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy

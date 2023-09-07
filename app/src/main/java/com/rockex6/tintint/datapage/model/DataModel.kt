@@ -1,4 +1,4 @@
-package com.rockex6.tintint.model
+package com.rockex6.tintint.datapage.model
 
 data class DataModel(
     val albumId: Int = 0,
