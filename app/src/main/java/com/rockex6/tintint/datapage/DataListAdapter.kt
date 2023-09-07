@@ -1,4 +1,4 @@
-package com.rockex6.tintint
+package com.rockex6.tintint.datapage
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.rockex6.tintint.databinding.ItemDataBinding
 import com.rockex6.tintint.databinding.ItemLoadingBinding
-import com.rockex6.tintint.model.DataModel
+import com.rockex6.tintint.loadImage
+import com.rockex6.tintint.datapage.model.DataModel
 
 
 class DataListAdapter : Adapter<ViewHolder>() {
