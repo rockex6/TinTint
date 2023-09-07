@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rockex6.tintint.api.APIManager
 import com.rockex6.tintint.databinding.ActivityDataBinding
-import com.rockex6.tintint.model.DataModel
 import com.rockex6.tintint.viewmodel.DataRepository
 import com.rockex6.tintint.viewmodel.DataViewModel
 
@@ -32,7 +31,7 @@ class DataActivity : AppCompatActivity() {
     }
 
     private fun observeData() {
-        viewModel.mDataList.observe(this) {dataList ->
+        viewModel.mDataList.observe(this) { dataList ->
             hideProgressBar()
             mDataListAdapter?.setData(dataList)
         }
@@ -45,6 +44,7 @@ class DataActivity : AppCompatActivity() {
             isLoading = it
         }
     }
+
     override fun onStart() {
         super.onStart()
         observeData()
@@ -52,6 +52,7 @@ class DataActivity : AppCompatActivity() {
     }
 
     fun loadMoreData() {
+        mDataListAdapter?.addLoadingItem()
         viewModel.loadMore()
     }
 
@@ -60,7 +61,7 @@ class DataActivity : AppCompatActivity() {
         binding.list.apply {
             layoutManager = GridLayoutManager(this@DataActivity, 4)
             adapter = mDataListAdapter
-            addOnScrollListener(object :RecyclerView.OnScrollListener(){
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
                     val layoutManager = recyclerView.layoutManager as LinearLayoutManager
