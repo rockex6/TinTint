@@ -6,6 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface DataApi {
-    @GET("{page}/photos")
-    fun getData(@Path("page") page: Int): Single<List<DataModel>>
+    @GET("photos")
+    fun getData(): Single<List<DataModel>>
 }

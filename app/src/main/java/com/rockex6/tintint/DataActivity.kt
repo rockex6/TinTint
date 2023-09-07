@@ -41,6 +41,9 @@ class DataActivity : AppCompatActivity() {
             hideProgressBar()
             it?.let { showErrorMessage(it) }
         }
+        viewModel.isLoading.observe(this) {
+            isLoading = it
+        }
     }
     override fun onStart() {
         super.onStart()
