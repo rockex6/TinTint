@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 object APIManager {
 
     val api: DataApi = Retrofit.Builder()
-        .baseUrl("https://jsonplaceholder.typicode.com/")
+        .baseUrl("https://jsonplaceholder.typicode.com/albums/")
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
