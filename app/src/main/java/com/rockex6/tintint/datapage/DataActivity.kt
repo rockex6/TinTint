@@ -1,6 +1,7 @@
 package com.rockex6.tintint.datapage
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -8,8 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.rockex6.tintint.datapage.api.APIManager
+import android.R
 import com.rockex6.tintint.databinding.ActivityDataBinding
+import com.rockex6.tintint.datapage.api.APIManager
 import com.rockex6.tintint.datapage.viewmodel.DataRepository
 import com.rockex6.tintint.datapage.viewmodel.DataViewModel
 import com.rockex6.tintint.datapage.viewmodel.DataViewModelFactory
@@ -28,6 +30,7 @@ class DataActivity : AppCompatActivity() {
         val vmFactory = DataViewModelFactory(repo)
         viewModel = ViewModelProvider(this, vmFactory)[DataViewModel::class.java]
         initRecyclerView()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setContentView(binding.root)
     }
 
@@ -84,5 +87,12 @@ class DataActivity : AppCompatActivity() {
 
     private fun showErrorMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.home -> finish()
+        }
+        return true
     }
 }

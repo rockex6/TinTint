@@ -46,7 +46,6 @@ class DataViewModel(private val repository: DataRepository) : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-        page = 1
         mCompositeDisposable.clear()
     }
 }
