@@ -12,6 +12,7 @@ class DataViewModel(private val repository: DataRepository) : ViewModel() {
 
     private val mCompositeDisposable = CompositeDisposable()
     val mDataList = MutableLiveData<List<DataModel>>()
+    private val mAllDataTemp = ArrayList<DataModel>()
 
     private var page = 1
     var isLoading = MutableLiveData<Boolean>()
@@ -26,30 +27,54 @@ class DataViewModel(private val repository: DataRepository) : ViewModel() {
                 .subscribeBy(
                     onSuccess = { dataList ->
                         isLoading.value = false
-                        val firstPosition = if (page == 1) {
-                            0
-                        } else {
-                            (page -1) * 50
-                        }
-                        mDataList.postValue(dataList.subList(firstPosition, page * 50))
+                        mAllDataTemp.addAll(dataList)
+                        mDataList.postValue(getCurrentData(mAllDataTemp))
                     },
                     onError = { e ->
                         isLoading.value = false
-                        errorMessage.postValue(e.message)
+                        showErrorMessage(e.message)
                     }
                 )
         )
     }
 
     fun loadMore() {
+        isLoading.value = true
         page++
-        getData()
+        try {
+            val newData = getCurrentData(mAllDataTemp)
+            if (newData.isNotEmpty()) {
+                mDataList.value = newData
+            }
+            isLoading.value = false
+        } catch (e: Exception) {
+            showErrorMessage(e.message)
+        }
     }
 
+    private fun getCurrentData(dataList: List<DataModel>): List<DataModel> {
+        if (page * 50 > dataList.size) return ArrayList()
+        val firstPosition = if (page == 1) {
+            0
+        } else if ((page - 1) * 50 > dataList.size) {
+            (page - 1) * 50 - dataList.size
+        } else {
+            (page - 1) * 50
+        }
+        val lastPosition = if (page * 50 > dataList.size) {
+            dataList.size
+        } else {
+            page * 50
+        }
+        return dataList.subList(firstPosition, lastPosition)
+    }
+
+    private fun showErrorMessage(e: String?) {
+        errorMessage.value = e
+    }
 
     override fun onCleared() {
         super.onCleared()
-        page = 1
         mCompositeDisposable.clear()
     }
 }
