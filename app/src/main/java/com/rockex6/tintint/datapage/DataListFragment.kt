@@ -10,15 +10,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.rockex6.tintint.databinding.FragmentDataBinding
 import com.rockex6.tintint.datapage.api.APIManager
-import com.rockex6.tintint.databinding.ActivityDataBinding
 import com.rockex6.tintint.datapage.viewmodel.DataRepository
 import com.rockex6.tintint.datapage.viewmodel.DataViewModel
 import com.rockex6.tintint.datapage.viewmodel.DataViewModelFactory
 
 class DataListFragment : Fragment() {
 
-    private lateinit var binding: ActivityDataBinding
+    private lateinit var binding: FragmentDataBinding
     private lateinit var viewModel: DataViewModel
     private var mDataListAdapter: DataListAdapter? = null
     private var isLoading = false
@@ -34,12 +34,13 @@ class DataListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = ActivityDataBinding.inflate(layoutInflater)
+        binding = FragmentDataBinding.inflate(layoutInflater)
         val repo = DataRepository(APIManager.api)
         val vmFactory = DataViewModelFactory(repo)
         viewModel = ViewModelProvider(this, vmFactory)[DataViewModel::class.java]
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()

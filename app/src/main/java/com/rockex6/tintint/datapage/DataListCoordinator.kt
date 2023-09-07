@@ -8,7 +8,11 @@ class DataListCoordinator(private val fragmentManager: FragmentManager) {
     private val mDataListFragment = DataListFragment()
     fun showDataList() {
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.container, mDataListFragment)
+        if (mDataListFragment.isAdded) {
+            fragmentTransaction.show(mDataListFragment)
+        } else {
+            fragmentTransaction.replace(R.id.container, mDataListFragment)
+        }
         fragmentTransaction.commit()
     }
 
