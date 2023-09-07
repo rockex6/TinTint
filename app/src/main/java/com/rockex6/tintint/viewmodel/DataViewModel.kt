@@ -38,6 +38,7 @@ class DataViewModel(private val repository: DataRepository) : ViewModel() {
     }
 
     fun loadMore() {
+        isLoading.value = true
         page++
         getData()
     }

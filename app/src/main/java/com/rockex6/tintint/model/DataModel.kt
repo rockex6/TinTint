@@ -5,5 +5,8 @@ data class DataModel(
     val id: Int = 0,
     val title: String = "",
     val url: String = "",
-    val thumbnailUrl: String = ""
-)
+    val thumbnailUrl: String = "",
+    val type: Int = 0
+) {
+    constructor(type: Int) : this(0, 0, "", "", "", type)
+}
