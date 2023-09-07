@@ -17,9 +17,11 @@ class DataListCoordinator(private val fragmentManager: FragmentManager) {
     }
 
     fun hideDataList() {
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.hide(mDataListFragment)
-        fragmentTransaction.commit()
+        if (isVisible()) {
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.hide(mDataListFragment)
+            fragmentTransaction.commit()
+        }
     }
 
     fun isVisible(): Boolean {
