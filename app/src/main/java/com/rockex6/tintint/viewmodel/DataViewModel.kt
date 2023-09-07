@@ -14,18 +14,23 @@ class DataViewModel(private val repository: DataRepository) : ViewModel() {
     val mDataList = MutableLiveData<List<DataModel>>()
 
     private var page = 1
+    val isLoading = MutableLiveData<Boolean>()
     var errorMessage = MutableLiveData<String?>()
 
     fun getData() {
+        isLoading.value = true
         mCompositeDisposable.add(
             repository.getData(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
+
                     onSuccess = { dataList ->
+                        isLoading.value = false
                         mDataList.postValue(dataList)
                     },
                     onError = { e ->
+                        isLoading.value = false
                         errorMessage.postValue(e.message)
                     }
                 )
