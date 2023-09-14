@@ -78,6 +78,7 @@ class DataActivity : AppCompatActivity() {
                     }
                 }
             })
+            setItemViewCacheSize(20)
         }
     }
 
